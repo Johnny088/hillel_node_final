@@ -2,7 +2,6 @@ import { ID_NOT_FOUND_MSG } from '../constants.js';
 import {
   addNewMovieService,
   deleteMovieService,
-  getMovieByIdService,
   getMoviesService,
   updateMovieService,
 } from '../services/movies.js';
@@ -17,16 +16,6 @@ export const getMovies = async (req, res) => {
     search,
   });
   res.json(movies);
-};
-
-export const getMovieById = async (req, res) => {
-  const { id } = req.params;
-  const movie = await getMovieByIdService(id);
-
-  if (!movie) {
-    res.status(404).json(ID_NOT_FOUND_MSG);
-  }
-  res.json(movie);
 };
 
 export const addNewMovie = async (req, res) => {

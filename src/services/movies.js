@@ -26,8 +26,6 @@ export const getMoviesService = async ({
   return { muvies, totalCount, totalPages, page, limit };
 };
 
-export const getMovieByIdService = id => Movie.findById(id);
-
 export const addNewMovieService = data => Movie.create(data);
 
 export const updateMovieService = async (id, data, options) => {
