@@ -43,4 +43,4 @@ export const updateMovieService = async (id, data, options) => {
   };
 };
 
-export const deleteMovieService = async id => Movie.findByIdAndDelete(id);
+export const deleteMovieService = async id => await Movie.findByIdAndDelete(id);

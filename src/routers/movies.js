@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   addNewMovie,
+  deleteMovie,
   getMovies,
   updateMovie,
   updateOrCreateMovie,
@@ -12,6 +13,7 @@ import {
   updateMoviesSchema,
 } from '../validation/movies.js';
 import { checkToken } from '../middlewares/checkToken.js';
+import { checkRoles } from '../middlewares/checkRoles.js';
 
 const moviesRouter = Router();
 
@@ -19,10 +21,27 @@ moviesRouter.use(checkToken);
 
 moviesRouter.get('/', celebrate(getMoviesSchema), getMovies);
 
-moviesRouter.post('/', celebrate(createMoviesSchema), addNewMovie);
+moviesRouter.post(
+  '/',
+  checkRoles('admin'),
+  celebrate(createMoviesSchema),
+  addNewMovie,
+);
 
-moviesRouter.patch('/:id', celebrate(updateMoviesSchema), updateMovie);
+moviesRouter.patch(
+  '/:id',
+  checkRoles('admin'),
+  celebrate(updateMoviesSchema),
+  updateMovie,
+);
 
-moviesRouter.put('/:id', celebrate(updateMoviesSchema), updateOrCreateMovie);
+moviesRouter.put(
+  '/:id',
+  checkRoles('admin'),
+  celebrate(updateMoviesSchema),
+  updateOrCreateMovie,
+);
+
+moviesRouter.delete('/:id', checkRoles('admin'), deleteMovie);
 
 export default moviesRouter;
