@@ -23,7 +23,7 @@ export const getMoviesService = async ({
   ]);
   const totalPages = Math.ceil(totalCount / limit);
 
-  return { movies, totalCount, totalPages };
+  return { muvies, totalCount, totalPages };
 };
 
 export const getMovieByIdService = id => Movie.findById(id);

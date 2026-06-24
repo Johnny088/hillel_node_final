@@ -1,5 +1,5 @@
 import { Joi, Segments } from 'celebrate';
-import { MUVIE_GENRES } from '../constants';
+import { MUVIE_GENRES } from '../constants.js';
 import { isValidObjectId } from 'mongoose';
 
 const validateId = (id, utils) =>
@@ -10,7 +10,7 @@ export const getMoviesSchema = {
     page: Joi.number().integer().positive().default(1),
     limit: Joi.number().integer().min(5).max(20).default(5),
     sortBy: Joi.string().valid('title', 'genre'),
-    sortOrder: Joi.string.valid('asc', 'desc').default('asc'),
+    sortOrder: Joi.string().valid('asc', 'desc').default('asc'),
     search: Joi.string(),
   }),
 };

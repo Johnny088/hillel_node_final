@@ -8,7 +8,7 @@ import {
 } from '../services/movies.js';
 
 export const getMovies = async (req, res) => {
-  const { page, limit, sortBy, sortOrder, search } = req.body;
+  const { page, limit, sortBy, sortOrder, search } = req.query;
   const movies = await getMoviesService({
     page,
     limit,
