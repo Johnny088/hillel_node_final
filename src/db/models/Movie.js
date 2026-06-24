@@ -22,11 +22,13 @@ const movieSchema = new Schema({
   },
   vote_average: {
     type: Number,
-    required: true,
   },
   trailer: {
     type: String,
     required: true,
+  },
+  genre: {
+    type: String,
   },
 });
 

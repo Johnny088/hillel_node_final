@@ -1,6 +1,30 @@
 import { Movie } from '../db/models/Movie.js';
 
-export const getMoviesService = () => Movie.find();
+export const getMoviesService = async ({
+  page,
+  limit,
+  sortBy,
+  sortOrder,
+  search,
+}) => {
+  const skip = (page - 1) * limit;
+  const movieQuery = Movie.find();
+  if (search && search.trim()) {
+    movieQuery.where({
+      title: { $regex: search, $options: 'i' },
+    });
+  }
+  const [totalCount, muvies] = await Promise.all([
+    movieQuery.clone().countDocuments(),
+    movieQuery
+      .skip(skip)
+      .limit(limit)
+      .sort({ [sortBy]: sortOrder }),
+  ]);
+  const totalPages = Math.ceil(totalCount / limit);
+
+  return { movies, totalCount, totalPages };
+};
 
 export const getMovieByIdService = id => Movie.findById(id);
 

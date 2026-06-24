@@ -6,17 +6,24 @@ import {
   updateMovie,
   updateOrCreateMovie,
 } from '../controllers/movies.js';
+import { celebrate } from 'celebrate';
+import {
+  createMoviesSchema,
+  getMoviesSchema,
+  idSchema,
+  updateMoviesSchema,
+} from '../validation/movies.js';
 
 const moviesRouter = Router();
 
-moviesRouter.get('/', getMovies);
+moviesRouter.get('/', celebrate(getMoviesSchema), getMovies);
 
-moviesRouter.get('/:id', getMovieById);
+moviesRouter.get('/:id', celebrate(idSchema), getMovieById);
 
-moviesRouter.post('/', addNewMovie);
+moviesRouter.post('/', celebrate(createMoviesSchema), addNewMovie);
 
-moviesRouter.patch('/:id', updateMovie);
+moviesRouter.patch('/:id', celebrate(updateMoviesSchema), updateMovie);
 
-moviesRouter.put('/:id', updateOrCreateMovie);
+moviesRouter.put('/:id', celebrate(updateMoviesSchema), updateOrCreateMovie);
 
 export default moviesRouter;
