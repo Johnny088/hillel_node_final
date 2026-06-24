@@ -1,4 +1,4 @@
-import { idNotFound } from '../constants.js';
+import { ID_NOT_FOUND_MSG } from '../constants.js';
 import {
   addNewMovieService,
   deleteMovieService,
@@ -24,7 +24,7 @@ export const getMovieById = async (req, res) => {
   const movie = await getMovieByIdService(id);
 
   if (!movie) {
-    res.status(404).json(idNotFound);
+    res.status(404).json(ID_NOT_FOUND_MSG);
   }
   res.json(movie);
 };
@@ -41,7 +41,7 @@ export const updateMovie = async (req, res) => {
   const result = await updateMovieService(id, data);
 
   if (!result) {
-    res.status(404).json(idNotFound);
+    res.status(404).json(ID_NOT_FOUND_MSG);
   }
 
   res.json(result.data);
@@ -60,7 +60,7 @@ export const deleteMovie = async (req, res) => {
   const { id } = req.params;
   const movie = await deleteMovieService(id);
   if (!movie) {
-    res.status(404).json(idNotFound);
+    res.status(404).json(ID_NOT_FOUND_MSG);
   }
   res.status(204);
 };
