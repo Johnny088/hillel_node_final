@@ -2,31 +2,25 @@ import { Schema, model } from 'mongoose';
 
 const movieSchema = new Schema(
   {
-    movieId: {
-      type: String,
-      required: true,
-    },
-    key: {
-      type: String,
-      required: true,
-    },
     title: {
       type: String,
       required: true,
     },
-    describtion: {
+    description: {
       type: String,
     },
-    release_data: {
+    release_date: {
       type: Date,
       required: true,
     },
     vote_average: {
       type: Number,
     },
-    trailer: {
+    posterUrl: {
       type: String,
-      required: true,
+    },
+    trailerUrl: {
+      type: String,
     },
     genre: {
       type: String,

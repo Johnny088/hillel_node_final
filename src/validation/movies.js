@@ -1,6 +1,5 @@
 import { Joi, Segments } from 'celebrate';
-import { MUVIE_GENRES } from '../constants.js';
-import { isValidObjectId } from 'mongoose';
+import { MOVIE_GENRES } from '../constants.js';
 import { validateId } from './common.js';
 
 export const getMoviesSchema = {
@@ -16,28 +15,30 @@ export const getMoviesSchema = {
 export const createMoviesSchema = {
   [Segments.BODY]: Joi.object({
     title: Joi.string().min(3).required,
-    describtion: Joi.string(),
-    release_data: Joi.date().min('1895-01-01').max('now').messages({
+    description: Joi.string(),
+    release_date: Joi.date().min('1895-01-01').max('now').messages({
       'date.min': "realese data can't be earlier than 1895",
       'date.max': "realese data can't be more than current data",
     }),
     vote_average: Joi.number().min(1).max(10),
+    posterUrl: Joi.string(),
     trailer: Joi.string().required(),
-    genre: Joi.string().valid(...MUVIE_GENRES),
+    genre: Joi.string().valid(...MOVIE_GENRES),
   }),
 };
 
 export const updateMoviesSchema = {
   [Segments.BODY]: Joi.object({
     title: Joi.string().min(3),
-    describtion: Joi.string(),
-    release_data: Joi.date().min('1895-01-01').max('now').messages({
+    description: Joi.string(),
+    release_date: Joi.date().min('1895-01-01').max('now').messages({
       'date.min': "realese data can't be earlier than 1895",
       'date.max': "realese data can't be more than current data",
     }),
     vote_average: Joi.number().min(1).max(10),
-    trailer: Joi.string(),
-    genre: Joi.string().valid(...MUVIE_GENRES),
+    posterUrl: Joi.string(),
+    trailerUrl: Joi.string(),
+    genre: Joi.string().valid(...MOVIE_GENRES),
   }).min(1),
   [Segments.PARAMS]: Joi.object({
     id: Joi.string().custom(validateId).required(),

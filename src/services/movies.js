@@ -8,15 +8,15 @@ export const getMoviesService = async ({
   search,
 }) => {
   const skip = (page - 1) * limit;
-  const movieQuery = Movie.find();
+  const muvieQuery = Movie.find();
   if (search && search.trim()) {
-    movieQuery.where({
+    muvieQuery.where({
       title: { $regex: search, $options: 'i' },
     });
   }
   const [totalCount, muvies] = await Promise.all([
-    movieQuery.clone().countDocuments(),
-    movieQuery
+    muvieQuery.clone().countDocuments(),
+    muvieQuery
       .skip(skip)
       .limit(limit)
       .sort({ [sortBy]: sortOrder }),

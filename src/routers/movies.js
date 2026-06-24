@@ -13,16 +13,16 @@ import {
 } from '../validation/movies.js';
 import { checkToken } from '../middlewares/checkToken.js';
 
-const muviesRouter = Router();
+const moviesRouter = Router();
 
-muviesRouter.use(checkToken);
+moviesRouter.use(checkToken);
 
-muviesRouter.get('/', celebrate(getMoviesSchema), getMovies);
+moviesRouter.get('/', celebrate(getMoviesSchema), getMovies);
 
-muviesRouter.post('/', celebrate(createMoviesSchema), addNewMovie);
+moviesRouter.post('/', celebrate(createMoviesSchema), addNewMovie);
 
-muviesRouter.patch('/:id', celebrate(updateMoviesSchema), updateMovie);
+moviesRouter.patch('/:id', celebrate(updateMoviesSchema), updateMovie);
 
-muviesRouter.put('/:id', celebrate(updateMoviesSchema), updateOrCreateMovie);
+moviesRouter.put('/:id', celebrate(updateMoviesSchema), updateOrCreateMovie);
 
-export default muviesRouter;
+export default moviesRouter;
