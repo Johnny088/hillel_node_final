@@ -9,8 +9,13 @@ import {
   findUserByEmail,
 } from '../services/auth.js';
 import { clearCookies, setCookies } from '../utils/cookies.js';
+import { User } from '../db/models/User.js';
 
 export const signUp = async (req, res) => {
+  const userRole = await User.countDocuments();
+
+  const role = userRole === 0 ? 'admin' : 'user';
+
   const { userName, email, password } = req.body;
 
   const user = await findUserByEmail(email);
@@ -25,6 +30,7 @@ export const signUp = async (req, res) => {
     userName,
     email,
     password: hashedPassword,
+    role,
   });
 
   const session = await createSession(newUser._id);
