@@ -9,7 +9,6 @@ import { celebrate } from 'celebrate';
 import {
   createMoviesSchema,
   getMoviesSchema,
-  idSchema,
   updateMoviesSchema,
 } from '../validation/movies.js';
 import { checkToken } from '../middlewares/checkToken.js';

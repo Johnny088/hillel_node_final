@@ -1,9 +1,7 @@
 import { Joi, Segments } from 'celebrate';
 import { MUVIE_GENRES } from '../constants.js';
 import { isValidObjectId } from 'mongoose';
-
-const validateId = (id, utils) =>
-  isValidObjectId(id) ? id : utils.message('invalid id');
+import { validateId } from './common.js';
 
 export const getMoviesSchema = {
   [Segments.QUERY]: Joi.object({
@@ -40,10 +38,7 @@ export const updateMoviesSchema = {
     vote_average: Joi.number().min(1).max(10),
     trailer: Joi.string(),
     genre: Joi.string().valid(...MUVIE_GENRES),
-  }),
-};
-
-export const idSchema = {
+  }).min(1),
   [Segments.PARAMS]: Joi.object({
     id: Joi.string().custom(validateId).required(),
   }),
