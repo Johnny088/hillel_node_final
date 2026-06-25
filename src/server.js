@@ -8,6 +8,7 @@ import usersRouter from './routers/users.js';
 import cookieParser from 'cookie-parser';
 import { errors } from 'celebrate';
 import { errorHandler } from './middlewares/errorHandler.js';
+import cors from 'cors';
 
 const PORT = process.env.PORT;
 
