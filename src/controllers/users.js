@@ -4,7 +4,7 @@ import { updateUsersPhotoService } from '../services/users.js';
 import { ID_NOT_FOUND_MSG } from '../constants.js';
 export const updateUserPhoto = async (req, res) => {
   if (!req.file) {
-    throw createHttpError(404, 'there is no file');
+    throw createHttpError(400, 'there is no file');
   }
 
   const id = req.user._id;

@@ -8,6 +8,6 @@ const usersRouter = Router();
 
 usersRouter.use(checkToken);
 
-usersRouter.patch('/', parseFile.single('avatarUrl'), updateUserPhoto);
+usersRouter.patch('/avatar', parseFile.single('avatarUrl'), updateUserPhoto);
 
 export default usersRouter;
