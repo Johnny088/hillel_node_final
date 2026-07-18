@@ -16,11 +16,11 @@ export const createMoviesSchema = {
   [Segments.BODY]: Joi.object({
     title: Joi.string().min(3).required(),
     description: Joi.string(),
-    release_date: Joi.date().min('1895-01-01').max('now').messages({
+    releaseDate: Joi.date().min('1895-01-01').max('now').messages({
       'date.min': "realese data can't be earlier than 1895",
       'date.max': "realese data can't be more than current data",
     }),
-    vote_average: Joi.number().min(1).max(10),
+    voteAverage: Joi.number().min(1).max(10),
     posterUrl: Joi.string(),
     trailerUrl: Joi.string().required(),
     genre: Joi.array()
@@ -33,11 +33,11 @@ export const updateMoviesSchema = {
   [Segments.BODY]: Joi.object({
     title: Joi.string().min(3),
     description: Joi.string(),
-    release_date: Joi.date().min('1895-01-01').max('now').messages({
+    releaseDate: Joi.date().min('1895-01-01').max('now').messages({
       'date.min': "realese data can't be earlier than 1895",
       'date.max': "realese data can't be more than current data",
     }),
-    vote_average: Joi.number().min(1).max(10),
+    voteAverage: Joi.number().min(1).max(10),
     posterUrl: Joi.string(),
     trailerUrl: Joi.string(),
     genre: Joi.array()
