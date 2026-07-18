@@ -19,3 +19,9 @@ export const updateUserPhoto = async (req, res) => {
 
   res.json(result);
 };
+
+export const getCurrentUser = (req, res) => {
+  const { email, username, _id } = req.user;
+
+  res.json(email, username, _id);
+};

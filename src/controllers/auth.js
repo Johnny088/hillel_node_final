@@ -37,7 +37,12 @@ export const signUp = async (req, res) => {
 
   setCookies(session, res);
 
-  res.status(201).json({ userName: newUser.userName, email: newUser.email });
+  res.status(201).json({
+    username: user.userName,
+    email: user.email,
+    avatarUrl: user.avatarUrl,
+    role: user.role,
+  });
 };
 
 export const signIn = async (req, res) => {
@@ -59,7 +64,12 @@ export const signIn = async (req, res) => {
 
   setCookies(session, res);
 
-  res.json({ username: user.userName, email });
+  res.json({
+    username: user.userName,
+    email,
+    avatarUrl: user.avatarUrl,
+    role: user.role,
+  });
 };
 
 export const logout = async (req, res) => {
@@ -86,9 +96,11 @@ export const refreshSession = async (req, res) => {
     clearCookies(res);
     throw createHttpError(401, "Refresh token isn't valid");
   }
+
   await deleteSessionById(sessionId);
 
   const newSession = await createSession(session.userId);
   setCookies(newSession, res);
-  res.sendStatus(204);
+  // res.sendStatus(204);
+  res.status(200).json({ message: 'refresh is successful', success: true });
 };

@@ -14,7 +14,7 @@ export const getMoviesService = async ({
       title: { $regex: search, $options: 'i' },
     });
   }
-  const [totalCount, muvies] = await Promise.all([
+  const [totalCount, movies] = await Promise.all([
     muvieQuery.clone().countDocuments(),
     muvieQuery
       .skip(skip)
@@ -23,7 +23,7 @@ export const getMoviesService = async ({
   ]);
   const totalPages = Math.ceil(totalCount / limit);
 
-  return { muvies, totalCount, totalPages, page, limit };
+  return { movies, totalCount, totalPages, page, limit };
 };
 
 export const addNewMovieService = data => Movie.create(data);

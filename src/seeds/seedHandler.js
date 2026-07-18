@@ -71,10 +71,10 @@ export const initMovies = async () => {
       totalMovies.push({
         title: movie.title,
         description: movie.overview,
-        release_date: movie.release_date
+        releaseDate: movie.release_date
           ? new Date(movie.release_date).getFullYear()
           : 2026,
-        vote_average: movie.vote_average,
+        voteAverage: movie.vote_average,
         posterUrl: movie.poster_path
           ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
           : null,

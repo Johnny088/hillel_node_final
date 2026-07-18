@@ -5,7 +5,7 @@ import { validateId } from './common.js';
 export const getMoviesSchema = {
   [Segments.QUERY]: Joi.object({
     page: Joi.number().integer().positive().default(1),
-    limit: Joi.number().integer().min(5).max(20).default(5),
+    limit: Joi.number().integer().min(5).max(30).default(10),
     sortBy: Joi.string().valid('title', 'genre'),
     sortOrder: Joi.string().valid('asc', 'desc').default('asc'),
     search: Joi.string(),
@@ -23,7 +23,9 @@ export const createMoviesSchema = {
     vote_average: Joi.number().min(1).max(10),
     posterUrl: Joi.string(),
     trailerUrl: Joi.string().required(),
-    genre: Joi.string().valid(...MOVIE_GENRES),
+    genre: Joi.array()
+      .items(Joi.string().valid(...MOVIE_GENRES))
+      .default([]),
   }),
 };
 
@@ -38,7 +40,9 @@ export const updateMoviesSchema = {
     vote_average: Joi.number().min(1).max(10),
     posterUrl: Joi.string(),
     trailerUrl: Joi.string(),
-    genre: Joi.string().valid(...MOVIE_GENRES),
+    genre: Joi.array()
+      .items(Joi.string().valid(...MOVIE_GENRES))
+      .default([]),
   }).min(1),
   [Segments.PARAMS]: Joi.object({
     id: Joi.string().custom(validateId).required(),

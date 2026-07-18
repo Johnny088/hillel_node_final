@@ -9,11 +9,11 @@ const movieSchema = new Schema(
     description: {
       type: String,
     },
-    release_date: {
+    releaseDate: {
       type: Date,
       required: true,
     },
-    vote_average: {
+    voteAverage: {
       type: Number,
     },
     posterUrl: {
@@ -23,7 +23,7 @@ const movieSchema = new Schema(
       type: String,
     },
     genre: {
-      type: String,
+      type: [String],
     },
   },
   { versionKey: false, timestamps: true },
