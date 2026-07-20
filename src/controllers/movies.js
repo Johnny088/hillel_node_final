@@ -3,20 +3,31 @@ import { ID_NOT_FOUND_MSG } from '../constants.js';
 import {
   addNewMovieService,
   deleteMovieService,
+  getMovieByIdService,
   getMoviesService,
   updateMovieService,
 } from '../services/movies.js';
 
 export const getMovies = async (req, res) => {
-  const { page, limit, sortBy, sortOrder, search } = req.query;
+  const { page, limit, sortBy, sortOrder, search, genre } = req.query;
   const movies = await getMoviesService({
     page,
     limit,
     sortBy,
     sortOrder,
     search,
+    genre,
   });
   res.json(movies);
+};
+
+export const getMovieById = async (req, res) => {
+  const { id } = req.params;
+  const movie = await getMovieByIdService(id);
+  if (!movie) {
+    throw createHttpError(404, ID_NOT_FOUND_MSG);
+  }
+  res.json(movie);
 };
 
 export const addNewMovie = async (req, res) => {

@@ -6,12 +6,18 @@ export const getMoviesService = async ({
   sortBy,
   sortOrder,
   search,
+  genre,
 }) => {
   const skip = (page - 1) * limit;
   const muvieQuery = Movie.find();
   if (search && search.trim()) {
     muvieQuery.where({
       title: { $regex: search, $options: 'i' },
+    });
+  }
+  if (genre && genre.trim()) {
+    muvieQuery.where({
+      genre: { $in: [genre] },
     });
   }
   const [totalCount, movies] = await Promise.all([
@@ -25,6 +31,8 @@ export const getMoviesService = async ({
 
   return { movies, totalCount, totalPages, page, limit };
 };
+
+export const getMovieByIdService = id => Movie.findById(id);
 
 export const addNewMovieService = data => Movie.create(data);
 

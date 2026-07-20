@@ -6,9 +6,10 @@ export const getMoviesSchema = {
   [Segments.QUERY]: Joi.object({
     page: Joi.number().integer().positive().default(1),
     limit: Joi.number().integer().min(5).max(30).default(10),
-    sortBy: Joi.string().valid('title', 'genre'),
+    sortBy: Joi.string().valid('title', 'genre').default('title'),
     sortOrder: Joi.string().valid('asc', 'desc').default('asc'),
     search: Joi.string(),
+    genre: Joi.string(),
   }),
 };
 

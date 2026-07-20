@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {
   addNewMovie,
   deleteMovie,
+  getMovieById,
   getMovies,
   updateMovie,
   updateOrCreateMovie,
@@ -14,12 +15,15 @@ import {
 } from '../validation/movies.js';
 import { checkToken } from '../middlewares/checkToken.js';
 import { checkRoles } from '../middlewares/checkRoles.js';
+import { idSchema } from '../validation/common.js';
 
 const moviesRouter = Router();
 
 moviesRouter.use(checkToken);
 
 moviesRouter.get('/', celebrate(getMoviesSchema), getMovies);
+
+moviesRouter.get('/:id', celebrate(idSchema), getMovieById);
 
 moviesRouter.post(
   '/',
