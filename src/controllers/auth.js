@@ -65,6 +65,7 @@ export const signIn = async (req, res) => {
   setCookies(session, res);
 
   res.json({
+    // _id,
     username: user.userName,
     email,
     avatarUrl: user.avatarUrl,
@@ -86,6 +87,8 @@ export const refreshSession = async (req, res) => {
 
   const session = await findSessionById(sessionId);
 
+  // console.log(session);
+
   if (!session) {
     throw createHttpError(401, "session wasn't found");
   }
@@ -101,6 +104,15 @@ export const refreshSession = async (req, res) => {
 
   const newSession = await createSession(session.userId);
   setCookies(newSession, res);
-  // res.sendStatus(204);
-  res.status(200).json({ message: 'refresh is successful', success: true });
+  res.status(200).json({
+    message: 'refresh is successful',
+    success: true,
+    user: {
+      // _id: session.userId._id,
+      username: session.userId.username || null,
+      email: session.userId.email,
+      avatarUrl: session.userId.avatarUrl || null,
+      role: session.userId.role,
+    },
+  });
 };
